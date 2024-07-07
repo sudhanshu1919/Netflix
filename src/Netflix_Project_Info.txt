@@ -1,3 +1,11 @@
+Published Our Code On GitHub
+
+git pull origin main
+git add .
+git commit -m "Resolved merge conflicts"
+git push origin main
+
+
 Netflix Project 
 
 1) Here are the npm commands to install each of the listed packages:
