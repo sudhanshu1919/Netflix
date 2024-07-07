@@ -1,0 +1,19 @@
+Netflix Project 
+
+1) Here are the npm commands to install each of the listed packages:
+
+	>> npm install react-router-dom
+	# Our Project Connected to firebases
+	>> npm install firebase
+	>> npm install styled-components
+
+
+API - 
+
+
+npm install axios firebase styled-components react-icons react-redux @reduxjs/toolkit react-router-dom
+
+Start Project
+Start Time: 0:00  To Stop Time: 36:37 - Completed
+Start Time: 36:37  To Stop Time: 1:12:42 - Completed 
+
