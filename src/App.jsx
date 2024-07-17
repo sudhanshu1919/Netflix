@@ -3,15 +3,18 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Netflix from "./pages/Netflix";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Player from "./pages/Player";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Netflix />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route exact path="/" element={<Netflix />} />
+          <Route exact index element={<Netflix />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/Player" element={<Player />} />
+          <Route exact path="/signup" element={<Signup />} />
         </Routes>
       </BrowserRouter>
     </>
