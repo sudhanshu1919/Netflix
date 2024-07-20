@@ -1,23 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 import { BsArrowLeft } from "react-icons/bs";
-import BgVideo from "../assets/ShowtimeOfficial_Trailer.mp4";
 import { useNavigate } from "react-router-dom";
-function Player() {
+import video from "../assets/video.mp4";
+export default function Player() {
   const navigate = useNavigate();
+
   return (
-    <Conatiner>
+    <Container>
       <div className="player">
         <div className="back">
           <BsArrowLeft onClick={() => navigate(-1)} />
         </div>
-        <video src={BgVideo} autoPlay loop controls muted></video>
+        <video src={video} autoPlay loop controls muted />
       </div>
-    </Conatiner>
+    </Container>
   );
 }
 
-const Conatiner = styled.div`
+const Container = styled.div`
   .player {
     width: 100vw;
     height: 100vh;
@@ -37,4 +38,3 @@ const Conatiner = styled.div`
     }
   }
 `;
-export default Player;

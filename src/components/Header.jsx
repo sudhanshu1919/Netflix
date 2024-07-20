@@ -1,27 +1,25 @@
 import React from "react";
-import styled from "styled-components";
-import Logo from "../assets/netflix.png";
 import { useNavigate } from "react-router-dom";
-function Header(props) {
+import styled from "styled-components";
+import logo from "../assets/logo.png";
+import { getAuth } from "../utils/firebase-config";
+
+export default function Header(props) {
   const navigate = useNavigate();
   return (
-    <>
-      <Container className="flex a-center j-between">
-        <div className="logo">
-          <img src={Logo} alt="Logo" width="120px" />
-        </div>
-
-        <button onClick={() => navigate(props.login ? "/login" : "/signup")}>
-          {props.login ? "Login" : "Sign in"}
-        </button>
-      </Container>
-    </>
+    <StyledHeader className="flex a-center j-between">
+      <div className="logo">
+        <img src={logo} alt="logo" />
+      </div>
+      <button onClick={() => navigate(props.login ? "/login" : "/signup")}>
+        {props.login ? "Log In" : "Sign In"}
+      </button>
+    </StyledHeader>
   );
 }
-
-const Container = styled.div`
+const StyledHeader = styled.header`
   padding: 0 4rem;
-  .log {
+  .logo {
     img {
       height: 5rem;
     }
@@ -33,9 +31,7 @@ const Container = styled.div`
     cursor: pointer;
     color: white;
     border-radius: 0.2rem;
-    font-weight: bold;
+    font-weight: bolder;
     font-size: 1.05rem;
   }
 `;
-
-export default Header;

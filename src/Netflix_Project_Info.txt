@@ -19,8 +19,9 @@ Netflix Project
 
 
 API - 
-
+https://developers.themoviedb.org/3/getting-started/introduction
 https://firebase.google.com/
+https://github.com/koolkishan/netflix-clone-react-node
 
 npm install axios firebase styled-components react-icons react-redux @reduxjs/toolkit react-router-dom
 

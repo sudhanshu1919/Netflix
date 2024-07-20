@@ -1,48 +1,74 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import Navbar from "../components/Navbar";
-import Bg1 from "../assets/bgImages/01.webp";
-import MovieLogo from "../assets/film.png";
+import backgroundImage from "../assets/home.jpg";
+import MovieLogo from "../assets/homeTitle.webp";
+import { onAuthStateChanged } from "firebase/auth";
+import { firebaseAuth } from "../utils/firebase-config";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchMovies, getGenres } from "../store";
 import { FaPlay } from "react-icons/fa";
 import { AiOutlineInfoCircle } from "react-icons/ai";
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 
+import Slider from "../components/Slider";
 function Netflix() {
-  const Navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
+  const movies = useSelector((state) => state.netflix.movies);
+  const genres = useSelector((state) => state.netflix.genres);
+  const genresLoaded = useSelector((state) => state.netflix.genresLoaded);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.pageYOffset !== 0);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    dispatch(getGenres());
   }, []);
+
+  useEffect(() => {
+    if (genresLoaded) {
+      dispatch(fetchMovies({ genres, type: "all" }));
+    }
+  }, [genresLoaded]);
+
+  onAuthStateChanged(firebaseAuth, (currentUser) => {
+    if (!currentUser) navigate("/login");
+  });
+
+  window.onscroll = () => {
+    setIsScrolled(window.pageYOffset === 0 ? false : true);
+    return () => (window.onscroll = null);
+  };
 
   return (
     <Container>
       <Navbar isScrolled={isScrolled} />
       <div className="hero">
-        <img src={Bg1} alt="Background" className="background-image" />
+        <img
+          src={backgroundImage}
+          alt="background"
+          className="background-image"
+        />
         <div className="container">
           <div className="logo">
-            <img src={MovieLogo} alt="MovieLogo" />
+            <img src={MovieLogo} alt="Movie Logo" />
           </div>
           <div className="buttons flex">
             <button
-              className="flex j-center a-center play-button"
-              onClick={() => Navigate("/Player")}
+              onClick={() => navigate("/player")}
+              className="flex j-center a-center"
             >
               <FaPlay />
               Play
             </button>
-            <button className="flex j-center a-center info-button">
+            <button className="flex j-center a-center">
               <AiOutlineInfoCircle />
               More Info
             </button>
           </div>
         </div>
       </div>
+      <Slider movies={movies} />
     </Container>
   );
 }
@@ -52,57 +78,48 @@ const Container = styled.div`
   .hero {
     position: relative;
     .background-image {
-      width: 100%;
-      height: 100vh;
-      object-fit: cover;
       filter: brightness(60%);
+    }
+    img {
+      height: 100vh;
+      width: 100vw;
     }
     .container {
       position: absolute;
       bottom: 5rem;
-      left: 3rem;
       .logo {
         img {
-          width: 20%;
-          height: auto;
+          width: 100%;
+          height: 100%;
+          margin-left: 5rem;
         }
       }
       .buttons {
-        margin-top: 2rem;
-        display: flex;
-        gap: 1rem;
+        margin: 5rem;
+        gap: 2rem;
         button {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 1.2rem;
-          gap: 0.5rem;
+          font-size: 1.4rem;
+          gap: 1rem;
           border-radius: 0.2rem;
-          padding: 0.5rem 1.5rem;
+          padding: 0.5rem;
+          padding-left: 2rem;
+          padding-right: 2.4rem;
           border: none;
           cursor: pointer;
-          transition: opacity 0.3s ease-in-out;
+          transition: 0.2s ease-in-out;
           &:hover {
             opacity: 0.8;
           }
-        }
-        .play-button {
-          background-color: white;
-          color: black;
-          svg {
-            font-size: 1.2rem;
-          }
-        }
-        .info-button {
-          background-color: rgba(109, 109, 110, 0.7);
-          color: white;
-          svg {
-            font-size: 1.2rem;
+          &:nth-of-type(2) {
+            background-color: rgba(109, 109, 110, 0.7);
+            color: white;
+            svg {
+              font-size: 1.8rem;
+            }
           }
         }
       }
     }
   }
 `;
-
 export default Netflix;
