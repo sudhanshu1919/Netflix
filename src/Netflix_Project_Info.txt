@@ -1,9 +1,10 @@
 # Published Our Code On GitHub
-
 git pull origin main
 git add .
 git commit -m "Resolved merge conflicts"
 git push origin main
+
+
 
 
 Netflix Project 
@@ -14,10 +15,12 @@ Netflix Project
 	# Our Project Connected to firebases
 	>> npm install firebase
 	>> npm install styled-components
+	>> npm i @reduxjs/toolkit
 
 
 API - 
 
+https://firebase.google.com/
 
 npm install axios firebase styled-components react-icons react-redux @reduxjs/toolkit react-router-dom
 
@@ -25,4 +28,6 @@ Start Project
 Start Time: 0:00  To Stop Time: 36:37 - Completed
 Start Time: 36:37  To Stop Time: 1:12:42 - Completed 
 Start Time: 1:12:42   To Stop Time: 1:24:12 - Completed 
+Start Time: 1:24:12   To Stop Time:  1:26:27- Completed 
+Start Time: 1:26:27   To Stop Time:  - Completed 
 

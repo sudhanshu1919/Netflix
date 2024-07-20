@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { BsArrowLeft } from "react-icons/bs";
-import BgVideo from "../assets/System.mp4";
+import BgVideo from "../assets/ShowtimeOfficial_Trailer.mp4";
 import { useNavigate } from "react-router-dom";
 function Player() {
   const navigate = useNavigate();
@@ -17,5 +17,24 @@ function Player() {
   );
 }
 
-const Conatiner = styled.div``;
+const Conatiner = styled.div`
+  .player {
+    width: 100vw;
+    height: 100vh;
+    .back {
+      position: absolute;
+      padding: 2rem;
+      z-index: 1;
+      svg {
+        font-size: 3rem;
+        cursor: pointer;
+      }
+    }
+    video {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+`;
 export default Player;
